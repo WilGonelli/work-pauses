@@ -6,15 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/global.css">
     <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/home.css">
     <script type="module" src="./js/home-script.js" defer></script>
     <title>Exercicies</title>
 </head>
 
 <body>
     <header id="header"></header>
-    <main>
+    <main class="home">
+        <h1>Exercicios</h1>
+        <button class="start-btn">Start</button>
     </main>
     <footer></footer>
+    <div class="modal" id="modal">
+        <h2 class="title">Alongamento de braço</h2>
+        <div class="exercicie-content">
+            <img class="gif-exercicies" src="./assets/Alongamento-cruzado.gif" alt="">
+            <div class="description-container">
+                <p class="description">
+                    O Alongamento de Ombro com o Braço Cruzado é um exercício que visa aumentar a
+                    flexibilidade e a amplitude de movimento das articulações dos ombros e braços. Este alongamento é
+                    especialmente benéfico para indivíduos que passam longos períodos em posições fixas, como em
+                    trabalhos de escritório, ou para atletas que demandam amplo movimento dos membros superiores.
+                </p>
+                <p class="description">
+                    Para realizar o exercício, siga os passos abaixo:
+                </p>
+                <p class="description">
+                    1. Fique em pé ou sentado com a coluna ereta.
+                </p>
+                <p class="description">
+                    2. Estenda um dos braços na frente do corpo, mantendo-o na altura do peito.
+                </p>
+                <p class="description">
+                    3. Utilize a outra mão para puxar o braço estendido em direção ao corpo, sentindo o alongamento na
+                    parte posterior do ombro e do braço.
+                </p>
+                <p class="description">
+                    4. Mantenha a posição durante a contagem dos segundos, respirando profundamente.
+                </p>
+            </div>
+        </div>
+        <div class="timer-container">
+            <button>anterior</button>
+            <div>
+                <p>timer <span>00:00</span></p>
+                <button>comecar</button>
+            </div>
+            <button>proximo</button>
+        </div>
+    </div>
 </body>
 
 </html>
