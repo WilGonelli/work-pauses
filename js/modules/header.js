@@ -6,8 +6,6 @@ export function headerFill(page = "") {
   const toHome = page !== "home" ? "home.html" : "#";
   const toSettings = page !== "settings" ? "settings.html" : "#";
 
-  console.log(toHome, toSettings, toHome !== "#" ? "active" : "");
-
   const headerContent = `
         <a href="${toHome}" class="header-icon ${toHome !== "#" ? "active" : ""}">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
