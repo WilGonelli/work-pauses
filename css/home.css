@@ -66,10 +66,76 @@
 }
 
 .timer-container {
-  border: 2px solid #30944e;
   max-width: 800px;
   width: 100%;
   padding: 12px;
   display: flex;
   justify-content: space-between;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  & p {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /* O gradiente usa a variável --progress para preencher o círculo */
+    background: conic-gradient(#4f46e5 var(--progress), #e2e8f0 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  & span {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 6px;
+    background-color: rgb(93, 93, 93);
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+}
+
+.timer-btn {
+  all: unset;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+.timer-btn:hover {
+  background-color: rgb(143, 146, 148);
+  color: #1dff61;
+}
+
+.arrow {
+  all: unset;
+  cursor: pointer;
+  padding: 12px;
+  background-color: rgb(69, 69, 250);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.5s ease;
+}
+
+.arrow:hover {
+  background-color: rgb(47, 47, 240);
 }
