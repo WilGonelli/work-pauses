@@ -1,7 +1,7 @@
 export const exercicies = [
   {
     id: 0,
-    name: "Alongamento de Ombro com o Braço Cruzado(direito)",
+    name: "Alongamento de Ombro com o Braço Cruzado",
     description:
       "O Alongamento de Ombro com o Braço Cruzado é um exercício que visa aumentar a flexibilidade e a amplitude de movimento das articulações dos ombros e braços. Este alongamento é especialmente benéfico para indivíduos que passam longos períodos em posições fixas, como em trabalhos de escritório, ou para atletas que demandam amplo movimento dos membros superiores.",
     steps: {
@@ -12,23 +12,10 @@ export const exercicies = [
     },
     img: "../assets/alongamento-ombro.png",
     time: 20,
+    side: ["esquero", "direito"],
   },
   {
     id: 1,
-    name: "Alongamento de Ombro com o Braço Cruzado(esquerdo)",
-    description:
-      "O Alongamento de Ombro com o Braço Cruzado é um exercício que visa aumentar a flexibilidade e a amplitude de movimento das articulações dos ombros e braços. Este alongamento é especialmente benéfico para indivíduos que passam longos períodos em posições fixas, como em trabalhos de escritório, ou para atletas que demandam amplo movimento dos membros superiores.",
-    steps: {
-      1: "Fique em pé ou sentado com a coluna ereta.",
-      2: "Estenda um dos braços na frente do corpo, mantendo-o na altura do peito.",
-      3: "Utilize a outra mão para puxar o braço estendido em direção ao corpo, sentindo o alongamento na parte posterior do ombro e do braço.",
-      4: "Mantenha a posição durante a contagem dos segundos, respirando profundamente.",
-    },
-    img: "../assets/alongamento-ombro.png",
-    time: 20,
-  },
-  {
-    id: 2,
     name: "Alongamento Reverso de Pulso",
     description:
       "O Alongamento Reverso de Pulso é um exercício essencial para manter a flexibilidade e a mobilidade dos músculos e tendões do antebraço e do punho. Este alongamento é especialmente benéfico para pessoas que realizam atividades que exigem movimentos repetitivos das mãos, como digitação ou trabalhos manuais.Este movimento ajuda a aliviar tensões, melhorar a circulação sanguínea na região e prevenir lesões, como a síndrome do túnel do carpo.",
@@ -41,9 +28,10 @@ export const exercicies = [
     },
     img: "../assets/alongamento-pulso-reverso.png",
     time: 15,
+    side: ["esquero", "direito"],
   },
   {
-    id: 3,
+    id: 2,
     name: "Alongamento Reverso de Pulso",
     description:
       "O Alongamento Reverso de Pulso é um exercício essencial para manter a flexibilidade e a mobilidade dos músculos e tendões do antebraço e do punho. Este alongamento é especialmente benéfico para pessoas que realizam atividades que exigem movimentos repetitivos das mãos, como digitação ou trabalhos manuais.Este movimento ajuda a aliviar tensões, melhorar a circulação sanguínea na região e prevenir lesões, como a síndrome do túnel do carpo.",
@@ -56,5 +44,6 @@ export const exercicies = [
     },
     img: "../assets/alongamento-pulso-normal.png",
     time: 15,
+    side: ["esquero", "direito"],
   },
 ];

@@ -13,15 +13,22 @@ export function openModal() {
   modalContent();
 }
 
-function startTimer(totalTime) {
+function closeModal() {
+  modal.classList.toggle("show");
+}
+
+function startTimer(totalTime, side) {
   if (timerInterval) clearInterval(timerInterval);
 
   timeLeft = totalTime;
   isRunning = true;
   modalContent();
 
-  const timerContainer = document.getElementById("timerContainer");
-  const timerText = document.getElementById("timerText");
+  const idName = "timerContainer" + side;
+  const idText = "timerText" + side;
+
+  const timerContainer = document.getElementById(idName);
+  const timerText = document.getElementById(idText);
 
   if (!timerContainer || !timerText) return;
 
@@ -63,6 +70,7 @@ function prevExercise() {
 }
 
 window.startTimer = startTimer;
+window.closeModal = closeModal;
 window.nextExercise = nextExercise;
 window.prevExercise = prevExercise;
 
@@ -114,9 +122,18 @@ async function modalContent() {
                     </path>
                 </svg>
             </button>
-            <div class="timer">
-                <p id="timerContainer" style="--progress: 0deg;"><span id="timerText">${exercicie.time}</span></p>
-                <button class="timer-btn" onclick="startTimer(${exercicie.time})" ${inRunning}>${inRunning ? "running" : "start"}</button>
+            <div class="timer-count">
+                  ${exercicie.side
+                    .map((side) => {
+                      return `
+                      <div class="timer">
+                          <p class="side">${side}</p>
+                          <p class="animation-container" id="${"timerContainer" + side}" style="--progress: 0deg;"><span id="${"timerText" + side}">${exercicie.time}</span></p>
+                          <button class="timer-btn" onclick="startTimer(${exercicie.time},'${side}')" ${inRunning}>${inRunning ? "running" : "start"}</button>
+                      </div>
+                    `;
+                    })
+                    .join("")}
             </div>
             <button class="arrow" onclick="nextExercise()" ${isLast}>
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em"
@@ -127,5 +144,13 @@ async function modalContent() {
                 </svg>
             </button>
         </div>
+        <button class="close-modal" onclick="closeModal()"><svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                viewBox="0 0 512 512" height="40px" width="40px" xmlns="http://www.w3.org/2000/svg">
+                <path fill="none" stroke-miterlimit="10" stroke-width="32"
+                    d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"></path>
+                <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                    d="M320 320 192 192m0 128 128-128"></path>
+            </svg>
+        </button>
         `;
 }

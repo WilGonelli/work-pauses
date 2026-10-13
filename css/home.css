@@ -44,6 +44,15 @@
   color: aliceblue;
 }
 
+.close-modal {
+  all: unset;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: aliceblue;
+  cursor: pointer;
+}
+
 .modal.show {
   display: flex;
 }
@@ -70,11 +79,19 @@
 }
 
 .timer-container {
+  position: absolute;
+  bottom: 0;
   max-width: 800px;
   width: 100%;
   padding: 12px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.timer-count {
+  display: flex;
+  gap: 24px;
 }
 
 .timer {
@@ -84,7 +101,7 @@
   justify-content: center;
   gap: 12px;
 
-  & p {
+  & .animation-container {
     position: relative;
     width: 60px;
     height: 60px;
@@ -109,6 +126,10 @@
     font-weight: bold;
     font-family: sans-serif;
   }
+}
+
+.side {
+  height: fit-content;
 }
 
 .timer-btn {
