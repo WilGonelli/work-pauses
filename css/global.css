@@ -8,4 +8,6 @@
 body {
   position: relative;
   background-color: rgb(32, 42, 52);
+  height: 100vh;
+  overflow: hidden;
 }

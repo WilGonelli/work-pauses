@@ -1,4 +1,4 @@
-export const exercicies = [
+export const exercises = [
   {
     id: 0,
     name: "Alongamento de Ombro com o Braço Cruzado",
@@ -12,7 +12,8 @@ export const exercicies = [
     },
     img: "../assets/alongamento-ombro.png",
     time: 20,
-    side: ["esquero", "direito"],
+    side: ["braço esquerdo", "braço direito"],
+    type: "alongamento",
   },
   {
     id: 1,
@@ -28,7 +29,8 @@ export const exercicies = [
     },
     img: "../assets/alongamento-pulso-reverso.png",
     time: 15,
-    side: ["esquero", "direito"],
+    side: ["mão esquerda", "mão direita"],
+    type: "alongamento",
   },
   {
     id: 2,
@@ -44,6 +46,7 @@ export const exercicies = [
     },
     img: "../assets/alongamento-pulso-normal.png",
     time: 15,
-    side: ["esquero", "direito"],
+    side: ["mão esquerda", "mão direita"],
+    type: "alongamento",
   },
 ];

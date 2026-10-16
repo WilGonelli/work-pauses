@@ -1,4 +1,5 @@
-import { exercicies } from "./exercicies.js";
+import { exercises } from "./exercises.js";
+import { modalContent } from "./modules/modal-content.js";
 
 const modal = document.getElementById("modal");
 
@@ -6,57 +7,87 @@ let timeLeft = 0;
 let timerInterval = null;
 let currentExerciseIndex = 0;
 let isRunning = false;
+let exerciseType = null;
 
-export function openModal() {
-  modal.classList.toggle("show");
+export function openModal(type) {
+  modal.classList.add("show");
+  timerInterval = null;
   currentExerciseIndex = 0;
-  modalContent();
+  exerciseType = type;
+  modalContentInit();
 }
 
 function closeModal() {
-  modal.classList.toggle("show");
+  modal.classList.remove("show");
 }
 
-function startTimer(totalTime, side) {
+async function startTimer(totalTime, sides) {
   if (timerInterval) clearInterval(timerInterval);
 
   timeLeft = totalTime;
   isRunning = true;
-  modalContent();
+  const sideSplit = sides.split(",");
+  modalContentInit();
 
-  const idName = "timerContainer" + side;
-  const idText = "timerText" + side;
+  const size = sideSplit.length;
 
-  const timerContainer = document.getElementById(idName);
-  const timerText = document.getElementById(idText);
+  const modalTimer = document.getElementById("modal-timer");
+  const timerContainer = document.getElementById("timerContainer");
+  const timerText = document.getElementById("timerText");
+  const sideText = document.getElementById("side");
 
   if (!timerContainer || !timerText) return;
 
-  timerInterval = setInterval(() => {
-    const elapsedTime = totalTime - timeLeft;
-    const progressDeg = (elapsedTime / totalTime) * 360;
+  try {
+    modalTimer.classList.toggle("show-timer");
+    const count = (pause = false) => {
+      return new Promise((resolve) => {
+        // Reseta o tempo para cada lado (caso queira o tempo total para cada um)
+        const timerActive = pause ? 10 : totalTime;
+        let timePerSide = timerActive;
+        timerText.textContent = timePerSide;
 
-    // Atualiza o círculo e o texto
-    timerContainer.style.setProperty("--progress", `${progressDeg}deg`);
-    timerText.textContent = timeLeft;
+        timerInterval = setInterval(() => {
+          const elapsedTime = timerActive - timePerSide;
+          const progressDeg = (elapsedTime / timerActive) * 360;
 
-    if (timeLeft > 0) {
-      timeLeft--;
-    } else {
-      clearInterval(timerInterval);
-      timerText.textContent = "Fim!";
-      isRunning = false;
-      modalContent();
+          timerContainer.style.setProperty("--progress", `${progressDeg}deg`);
+          timerText.textContent = timePerSide;
+
+          if (timePerSide > 0) {
+            timePerSide--;
+          } else {
+            clearInterval(timerInterval);
+            resolve(); // <--- Avisa o 'await' que essa contagem terminou e pode ir para o próximo lado!
+          }
+        }, 1000);
+      });
+    };
+
+    for (let i = 0; i < size; i++) {
+      console.log(sideSplit[i]);
+      sideText.textContent = sideSplit[i];
+      await count();
+      if (i + 1 < size) {
+        sideText.textContent = "intervalo";
+        await count(true);
+      }
     }
-  }, 1000);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    modalTimer.classList.toggle("show-timer");
+    isRunning = false;
+    modalContentInit();
+  }
 }
 
 function nextExercise() {
-  if (currentExerciseIndex < exercicies.length - 1) {
+  if (currentExerciseIndex < exercises.length - 1) {
     if (timerInterval) clearInterval(timerInterval); // Para o timer atual ao mudar de tela
     currentExerciseIndex++;
     isRunning = false;
-    modalContent();
+    modalContentInit();
   }
 }
 
@@ -65,7 +96,7 @@ function prevExercise() {
     if (timerInterval) clearInterval(timerInterval); // Para o timer atual ao mudar de tela
     currentExerciseIndex--;
     isRunning = false;
-    modalContent();
+    modalContentInit();
   }
 }
 
@@ -74,20 +105,22 @@ window.closeModal = closeModal;
 window.nextExercise = nextExercise;
 window.prevExercise = prevExercise;
 
-async function modalContent() {
-  if (!exercicies || exercicies.length < 1) {
+async function modalContentInit() {
+  if (!exercises || exercises.length < 1) {
     modal.innerHTML = `<p> Falha ao buscar exercicios</p>`;
     return;
   }
 
-  const exercicie = exercicies[currentExerciseIndex];
+  const exercisesFiltered = exercises.filter((ex) => ex.type === exerciseType);
+
+  const exercise = exercisesFiltered[currentExerciseIndex];
 
   const isFirst =
     currentExerciseIndex === 0
       ? "disabled style='opacity: 0.3; cursor: not-allowed;'"
       : "";
   const isLast =
-    currentExerciseIndex === exercicies.length - 1
+    currentExerciseIndex === exercisesFiltered.length - 1
       ? "disabled style='opacity: 0.3; cursor: not-allowed;'"
       : "";
 
@@ -95,62 +128,7 @@ async function modalContent() {
     ? "disabled style='opacity: 0.5; cursor: not-allowed;'"
     : "";
 
-  modal.innerHTML = `
-        <h2 class="title">${exercicie.name}</h2>
-        <div class="exercicie-content">
-            <img class="gif-exercicies" src="${exercicie.img}" alt="${exercicie.name}">
-            <div class="description-container">
-                <p class="description">${exercicie.description}</p>
-                <p class="description">
-                    Para realizar o exercício, siga os passos abaixo:
-                </p>
-                ${Object.entries(exercicie.steps)
-                  .map(([key, value]) => {
-                    return `
-                    <p class="description">${key}. ${value}</p>
-                    `;
-                  })
-                  .join("")}
-            </div>
-        </div>
-        <div class="timer-container">
-            <button class="arrow" onclick="prevExercise()" ${isFirst}>
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em"
-                    width="1em" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z">
-                    </path>
-                </svg>
-            </button>
-            <div class="timer-count">
-                  ${exercicie.side
-                    .map((side) => {
-                      return `
-                      <div class="timer">
-                          <p class="side">${side}</p>
-                          <p class="animation-container" id="${"timerContainer" + side}" style="--progress: 0deg;"><span id="${"timerText" + side}">${exercicie.time}</span></p>
-                          <button class="timer-btn" onclick="startTimer(${exercicie.time},'${side}')" ${inRunning}>${inRunning ? "running" : "start"}</button>
-                      </div>
-                    `;
-                    })
-                    .join("")}
-            </div>
-            <button class="arrow" onclick="nextExercise()" ${isLast}>
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em"
-                    width="1em" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z">
-                    </path>
-                </svg>
-            </button>
-        </div>
-        <button class="close-modal" onclick="closeModal()"><svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                viewBox="0 0 512 512" height="40px" width="40px" xmlns="http://www.w3.org/2000/svg">
-                <path fill="none" stroke-miterlimit="10" stroke-width="32"
-                    d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"></path>
-                <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
-                    d="M320 320 192 192m0 128 128-128"></path>
-            </svg>
-        </button>
-        `;
+  const text = modalContent(exercise, isFirst, isLast, inRunning);
+
+  modal.innerHTML = text;
 }

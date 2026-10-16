@@ -1,0 +1,164 @@
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  background-color: rgb(93, 93, 93);
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  align-items: center;
+  padding: 48px 24px;
+  color: aliceblue;
+  justify-content: space-between;
+}
+
+.close-modal {
+  all: unset;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: aliceblue;
+  cursor: pointer;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.exercise-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.exercise-content {
+  display: flex;
+  gap: 36px;
+}
+
+.gif-exercises {
+  width: 350px;
+}
+
+.description-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.description {
+  max-width: 600px;
+  text-indent: 24px;
+  line-height: 24px;
+}
+
+.timer-container {
+  position: absolute;
+  bottom: 0;
+  max-width: 800px;
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timer-count {
+  display: flex;
+  gap: 24px;
+}
+
+.timer-btn {
+  all: unset;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #4f46e5;
+  color: #ffffff;
+  border: 1.5px solid black;
+  font-size: 18px;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+.timer-btn:hover:not(:disabled) {
+  background-color: rgb(29, 15, 37);
+  color: #1dff61;
+}
+
+.arrow {
+  all: unset;
+  cursor: pointer;
+  padding: 12px;
+  background-color: rgb(69, 69, 250);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.5s ease;
+}
+
+.arrow:hover {
+  background-color: rgb(47, 47, 240);
+}
+
+.modal-timer {
+  position: absolute;
+  display: none;
+  width: 400px;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: calc(50% - 200px);
+  left: calc(50% - 200px);
+  border-radius: 36px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  padding: 24px;
+}
+
+.modal-timer.show-timer {
+  display: block;
+}
+
+.side {
+  font-size: 36px;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  & .animation-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    /* O gradiente usa a variável --progress para preencher o círculo */
+    background: conic-gradient(#4f46e5 var(--progress), #e2e8f0 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  & span {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 6px;
+    background-color: rgb(93, 93, 93);
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 24px;
+  }
+}

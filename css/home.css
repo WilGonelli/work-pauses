@@ -1,166 +1,72 @@
 .home {
   position: relative;
+  padding: 24px;
+  height: 80%;
 
   & h1 {
     margin-top: 12px;
     text-align: center;
     color: aliceblue;
   }
-
-  & .start-btn {
-    all: unset;
-    cursor: pointer;
-    background-color: #39bb60;
-    padding: 6px 12px;
-    border-radius: 6px;
-    position: absolute;
-    top: 6px;
-    right: 24px;
-    font-size: 22px;
-    color: aliceblue;
-    transition:
-      background-color 0.5s ease,
-      transform 0.5s ease;
-  }
-
-  & .start-btn:hover {
-    background-color: #30944e;
-    transform: scale(1.05);
-  }
 }
 
-.modal {
-  display: none;
-  position: absolute;
-  top: 0;
-  background-color: rgb(93, 93, 93);
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  flex-direction: column;
-  align-items: center;
-  padding: 48px 24px;
+.cards {
+  display: flex;
   gap: 24px;
-  color: aliceblue;
-}
-
-.close-modal {
-  all: unset;
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  color: aliceblue;
-  cursor: pointer;
-}
-
-.modal.show {
-  display: flex;
-}
-
-.exercicie-content {
-  display: flex;
-  gap: 36px;
-}
-
-.gif-exercicies {
-  width: 350px;
-}
-
-.description-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.description {
-  max-width: 600px;
-  text-indent: 24px;
-  line-height: 24px;
-}
-
-.timer-container {
-  position: absolute;
-  bottom: 0;
-  max-width: 800px;
-  width: 100%;
-  padding: 12px;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 30px;
 }
 
-.timer-count {
-  display: flex;
-  gap: 24px;
-}
-
-.timer {
+.exercises-card {
+  border: 2px solid gainsboro;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 18px;
+  padding: 0 24px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-
-  & .animation-container {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    /* O gradiente usa a variável --progress para preencher o círculo */
-    background: conic-gradient(#4f46e5 var(--progress), #e2e8f0 0deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  & span {
-    width: 52px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    padding: 6px;
-    background-color: rgb(93, 93, 93);
-    font-weight: bold;
-    font-family: sans-serif;
-  }
+  width: 100%;
 }
 
-.side {
-  height: fit-content;
+.card-title {
+  color: aliceblue;
+  text-align: center;
+  padding: 12px;
+  font-size: 24px;
 }
 
-.timer-btn {
+.exercises-desc {
+  color: aliceblue;
+  font-size: 18px;
+}
+
+.start-exercises {
   all: unset;
-  padding: 6px 12px;
   cursor: pointer;
+  padding: 12px 24px;
+  color: #d1f7dd;
+  background-color: #347949;
   border-radius: 12px;
+  border: 1px solid #030303;
   transition:
     background-color 0.5s ease,
-    color 0.5s ease;
+    color 0.5s ease,
+    transform 0.5s ease;
 }
 
-.timer-btn:hover:not(:disabled) {
-  background-color: rgb(143, 146, 148);
-  color: #1dff61;
-}
-
-.arrow {
-  all: unset;
-  cursor: pointer;
-  padding: 12px;
-  background-color: rgb(69, 69, 250);
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.5s ease;
-}
-
-.arrow:hover {
-  background-color: rgb(47, 47, 240);
+.start-exercises:hover {
+  color: #030303;
+  background-color: #36f870;
+  transform: scale(1.02);
 }

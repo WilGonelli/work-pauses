@@ -5,21 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/global.css">
-    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/modal.css">
     <link rel="stylesheet" href="./css/home.css">
     <script type="module" src="./js/home-script.js" defer></script>
-    <title>Exercicies</title>
+    <title>exercises</title>
 </head>
 
 <body>
-    <header id="header"></header>
     <main class="home">
         <h1>Exercicios</h1>
-        <button class="start-btn" id="start-btn">Start</button>
+        <div class="cards">
+            <div class="exercises-card">
+                <div class="card-content">
+                    <h3 class="card-title">Alongamento </h3>
+                    <p class="exercises-desc">quantidade de exercicio: <span id="total-sentado">0</span></p>
+                    <p class="exercises-desc">tempo de exercicio: <span id="time-sentado">00:00</span></p>
+                    <p class="exercises-desc">quantidade de exercicios feitos: <span>0</span></p>
+                </div>
+                <button class="start-exercises" id="sentado-btn">começar</button>
+            </div>
+            <div class="exercises-card">
+                <div class="card-content">
+                    <h3 class="card-title">Cardio</h3>
+                    <p class="exercises-desc">quantidade de exercicio: <span id="total-cardio">0</span></p>
+                    <p class="exercises-desc">tempo de exercicio: <span id="time-cardio">00:00</span></p>
+                    <p class="exercises-desc">quantidade de exercicios feitos: <span>0</span></p>
+                </div>
+                <button class="start-exercises" id="cardio-btn">começar</button>
+            </div>
+        </div>
     </main>
-    <footer></footer>
     <div class="modal" id="modal">
-
     </div>
 </body>
 
