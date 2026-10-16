@@ -42,7 +42,7 @@ async function startTimer(totalTime, sides) {
     modalTimer.classList.toggle("show-timer");
     const count = (pause = false) => {
       return new Promise((resolve) => {
-        // Reseta o tempo para cada lado (caso queira o tempo total para cada um)
+        // Reset the time for each side (in case full time is needed for each)
         const timerActive = pause ? 10 : totalTime;
         let timePerSide = timerActive;
         timerText.textContent = timePerSide;
@@ -58,7 +58,7 @@ async function startTimer(totalTime, sides) {
             timePerSide--;
           } else {
             clearInterval(timerInterval);
-            resolve(); // <--- Avisa o 'await' que essa contagem terminou e pode ir para o próximo lado!
+            resolve(); // <--- Notifies 'await' that this countdown is finished and can proceed to the next side!
           }
         }, 1000);
       });
@@ -69,7 +69,7 @@ async function startTimer(totalTime, sides) {
       sideText.textContent = sideSplit[i];
       await count();
       if (i + 1 < size) {
-        sideText.textContent = "intervalo";
+        sideText.textContent = "Rest";
         await count(true);
       }
     }
@@ -84,7 +84,7 @@ async function startTimer(totalTime, sides) {
 
 function nextExercise() {
   if (currentExerciseIndex < exercises.length - 1) {
-    if (timerInterval) clearInterval(timerInterval); // Para o timer atual ao mudar de tela
+    if (timerInterval) clearInterval(timerInterval); // Stops the current timer when changing exercise
     currentExerciseIndex++;
     isRunning = false;
     modalContentInit();
@@ -93,7 +93,7 @@ function nextExercise() {
 
 function prevExercise() {
   if (currentExerciseIndex > 0) {
-    if (timerInterval) clearInterval(timerInterval); // Para o timer atual ao mudar de tela
+    if (timerInterval) clearInterval(timerInterval); // Stops the current timer when changing exercise
     currentExerciseIndex--;
     isRunning = false;
     modalContentInit();
@@ -107,7 +107,7 @@ window.prevExercise = prevExercise;
 
 async function modalContentInit() {
   if (!exercises || exercises.length < 1) {
-    modal.innerHTML = `<p> Falha ao buscar exercicios</p>`;
+    modal.innerHTML = `<p>Failed to load exercises</p>`;
     return;
   }
 
@@ -124,11 +124,11 @@ async function modalContentInit() {
       ? "disabled style='opacity: 0.3; cursor: not-allowed;'"
       : "";
 
-  const inRunning = isRunning
+  const isRunningAttr = isRunning
     ? "disabled style='opacity: 0.5; cursor: not-allowed;'"
     : "";
 
-  const text = modalContent(exercise, isFirst, isLast, inRunning);
+  const content = modalContent(exercise, isFirst, isLast, isRunningAttr);
 
-  modal.innerHTML = text;
+  modal.innerHTML = content;
 }

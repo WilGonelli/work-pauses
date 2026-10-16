@@ -1,4 +1,4 @@
-export const modalContent = (exercise, isFirst, isLast, inRunning) => {
+export const modalContent = (exercise, isFirst, isLast, isRunningAttr) => {
   return `
             <button class="arrow" onclick="prevExercise()" ${isFirst}>
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em"
@@ -26,8 +26,8 @@ export const modalContent = (exercise, isFirst, isLast, inRunning) => {
                           .join("")}
                     </div>
                 </div>
-                <button class="timer-btn" onclick="startTimer(${exercise.time}, '${exercise.side}')" ${inRunning}>
-                    ${inRunning ? "running" : "start"}
+                <button class="timer-btn" onclick="startTimer(${exercise.time}, '${exercise.side}')" ${isRunningAttr}>
+                    ${isRunningAttr ? "running" : "start"}
                 </button>
             </div>
             <button class="arrow" onclick="nextExercise()" ${isLast}>

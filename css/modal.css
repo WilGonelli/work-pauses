@@ -140,7 +140,7 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    /* O gradiente usa a variável --progress para preencher o círculo */
+    /* The gradient uses the --progress variable to fill the circle */
     background: conic-gradient(#4f46e5 var(--progress), #e2e8f0 0deg);
     display: flex;
     align-items: center;

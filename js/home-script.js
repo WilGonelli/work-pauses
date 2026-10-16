@@ -1,11 +1,11 @@
 import { openModal } from "./modal.js";
 import { exercises } from "./exercises.js";
 
-const sentadoBtn = document.getElementById("sentado-btn");
-const totalItensSentado = document.getElementById("total-sentado");
-const timeSentado = document.getElementById("time-sentado");
+const stretchingBtn = document.getElementById("stretching-btn");
+const totalStretchingItems = document.getElementById("total-stretching");
+const timeStretching = document.getElementById("time-stretching");
 const cardioBtn = document.getElementById("cardio-btn");
-const totalItensCardio = document.getElementById("total-cardio");
+const totalCardioItems = document.getElementById("total-cardio");
 const timeCardio = document.getElementById("time-cardio");
 
 const initPage = () => {
@@ -18,41 +18,41 @@ const initModal = (type) => {
 
 document.addEventListener("DOMContentLoaded", initPage);
 
-sentadoBtn.addEventListener("click", () => initModal("alongamento"));
+stretchingBtn.addEventListener("click", () => initModal("alongamento"));
 cardioBtn.addEventListener("click", () => initModal("cardio"));
 
 const getValues = async () => {
-  let alongamentoTime = 0;
+  let stretchingTime = 0;
   let cardioTime = 0;
-  const sentadoFilter = exercises.filter(
-    (exercicio) => exercicio.type === "alongamento",
+  const stretchingFilter = exercises.filter(
+    (exercise) => exercise.type === "alongamento",
   );
   const cardioFilter = exercises.filter(
-    (exercicio) => exercicio.type === "cardio",
+    (exercise) => exercise.type === "cardio",
   );
-  for (let index = 0; index < sentadoFilter.length; index++) {
-    alongamentoTime +=
-      sentadoFilter[index].time * sentadoFilter[index].side.length +
-      sentadoFilter[index].pauseTime * (sentadoFilter[index].side.length - 1);
+  for (let index = 0; index < stretchingFilter.length; index++) {
+    stretchingTime +=
+      stretchingFilter[index].time * stretchingFilter[index].side.length +
+      stretchingFilter[index].pauseTime * (stretchingFilter[index].side.length - 1);
   }
   for (let index = 0; index < cardioFilter.length; index++) {
     cardioTime +=
       cardioFilter[index].time * cardioFilter[index].side.length +
       cardioFilter[index].pauseTime * (cardioFilter[index].side.length - 1);
   }
-  let minutos = Math.floor(alongamentoTime / 60);
-  let segundos = alongamentoTime % 60;
-  let minFormatado = String(minutos).padStart(2, "0");
-  let segFormatado = String(segundos).padStart(2, "0");
+  let minutes = Math.floor(stretchingTime / 60);
+  let seconds = stretchingTime % 60;
+  let formattedMinutes = String(minutes).padStart(2, "0");
+  let formattedSeconds = String(seconds).padStart(2, "0");
 
-  timeSentado.innerHTML = `${minFormatado}:${segFormatado}`;
-  totalItensSentado.innerHTML = sentadoFilter.length;
+  timeStretching.innerHTML = `${formattedMinutes}:${formattedSeconds}`;
+  totalStretchingItems.innerHTML = stretchingFilter.length;
 
-  minutos = Math.floor(cardioTime / 60);
-  segundos = cardioTime % 60;
-  minFormatado = String(minutos).padStart(2, "0");
-  segFormatado = String(segundos).padStart(2, "0");
+  minutes = Math.floor(cardioTime / 60);
+  seconds = cardioTime % 60;
+  formattedMinutes = String(minutes).padStart(2, "0");
+  formattedSeconds = String(seconds).padStart(2, "0");
 
-  timeCardio.innerHTML = `${minFormatado}:${segFormatado}`;
-  totalItensCardio.innerHTML = cardioFilter.length;
+  timeCardio.innerHTML = `${formattedMinutes}:${formattedSeconds}`;
+  totalCardioItems.innerHTML = cardioFilter.length;
 };
